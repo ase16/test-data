@@ -1,0 +1,22 @@
+{
+  "name": "test-data",
+  "description": "test data",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ase16/test-data.git"
+  },
+  "author": "Oliver Leumann, Andreas Albrecht, Roy Rutishauser, Shanmathuran Sritharan",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^1.19.0",
+    "twit": "^2.2.3",
+    "winston": "^2.2.0",
+    "gcloud": "^0.33.0",
+    "googleapis": "^5.2.1"
+  }
+}
