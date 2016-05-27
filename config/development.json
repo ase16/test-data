@@ -19,11 +19,7 @@
         "listOfVmsUpdateInterval": 10
     },
 
-    "stats": {
-        "updateInterval": 5
-    },
-
     "log": {
-        "level": "info"
+        "level": "debug"
     }
 }

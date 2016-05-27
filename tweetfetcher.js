@@ -2,6 +2,7 @@
 
 const config = require('config');
 const twit = require('twit');			// Twitter API module --> https://github.com/ttezel/twit
+const utils = require('./utils.js');
 const log = require('winston');
 log.level = config.get('log.level');
 
@@ -10,31 +11,6 @@ let tweetsFileStream;
 let keywordsFilename;
 let currentStreamTerms = [];
 
-
-// @parma callback fn(arr) - get array of keywords
-function getTerms(callback) {
-    // fetching tweets given keywords in a file
-    var fs = require('fs');
-    var keywords = [];
-    try {
-        fs.accessSync(keywordsFilename, fs.R_OK);
-        keywords = fs.readFileSync(keywordsFilename).toString().split('\n');
-    } catch (e) {
-        log.error("Cannot access keywords file: " + keywordsFilename);
-        keywords = [];
-    }
-
-    // some basic cleansing
-    keywords = keywords.map(function(k) {
-        return k.toLowerCase().trim();
-    });
-    keywords = keywords.filter(function(k) {
-        return k.length > 0;
-    });
-    keywords.sort();
-
-    callback(keywords);
-}
 
 // Processes incoming tweet.
 function onNewTweet(tweet) {
@@ -105,7 +81,7 @@ const tweetfetcher = {
         keywordsFilename = fileKeywords;
 
         // connect to twitter with given terms
-        getTerms(function(terms) {
+        utils.getTerms(keywordsFilename, function(terms) {
             subscribeToTweets(terms, function(stream) {
                 twitterStream = stream;
                 currentStreamTerms = terms;
